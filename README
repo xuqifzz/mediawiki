@@ -1,0 +1,53 @@
+全部操作都必须位于mediawiki目录下,首先执行
+chmod +x *.sh
+
+全新搭建:
+执行
+./new.sh
+
+因为可能要下载镜像,所以必须确认服务完全启动才能进行下一步,确认方法
+docker stack ps mediawiki
+docker service ls
+登录进行初始化设定
+http://x.x.x.x:8080
+按照向导进行配置,注意一下几点
+数据库环节
+数据库主机配置为:database
+数据库名称保持为:my_wiki
+数据库用户名配置为:wikiuser
+数据库密码配置为:example
+
+名称环节
+配置名称
+用户名,密码 随意
+扩展程序根据需要勾选
+
+选项环节
+可以取消出站电子邮件
+启用文件上传
+下载得到LocalSettings.php文件后,放到服务器backup目录中
+执行
+./new2.sh
+后,再执行
+./stop.sh
+关闭服务,完成初始配置
+
+正常启动:
+./run.sh
+
+关闭:
+./stop.sh
+
+备份:(建议关闭服务状态下进行)
+./backup.sh
+执行完后,备份文件地址:mediawiki目录下的backup.tar.gz
+
+恢复:
+将备份文件放到mediawiki目录下的backup.tar.gz
+然后执行
+./restore.sh
+
+清理(需要先关闭服务):
+./clean.sh
+
+
